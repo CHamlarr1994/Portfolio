@@ -1,0 +1,39 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CHamFlow · Taame Beraki</title><link rel="stylesheet" href="assets/style.css"></head><body><a class="skip" href="#contenu">Aller au contenu</a><header><div class="nav"><a class="brand" href="index.html">Taame Beraki<span>.</span></a><nav aria-label="Navigation principale"><a href="index.html#projets">Projets</a><a href="chamdocs.html">Étude de cas</a><a href="index.html#contact">Contact</a></nav></div></header><main id="contenu"><article class="markdown section"><a class="breadcrumbs" href="index.html">← Portfolio</a><h1>CHamFlow — Transformer une idée en projet structuré</h1>
+<p>CHamFlow est une application web que j’ai conçue pour aider une personne à transformer une idée encore floue en projet concret. L’utilisateur décrit son idée, son objectif et son niveau d’avancement ; l’application structure ensuite les informations et peut utiliser l’intelligence artificielle pour générer un parcours visuel adapté.</p>
+<p>La démonstration CHamFlow est actuellement conservée en accès privé.</p>
+<h3>Fonctionnalités principales</h3>
+<ul>
+<li>Analyse structurée distinguant les informations fournies, les hypothèses, les questions à clarifier et les pistes de MVP.</li>
+<li>Génération assistée par IA d’un diagramme personnalisé selon le type de projet et son objectif.</li>
+<li>Affichage du parcours avec Mermaid et export des résultats en Markdown, Mermaid ou SVG.</li>
+<li>Préparation d’un brouillon de collaboration ou de recrutement, modifiable avant tout envoi.</li>
+<li>Interface responsive testée sur ordinateur et téléphone.</li>
+</ul>
+<h3>User story — Organiser un service de prêt d’outils</h3>
+<blockquote>
+<p><strong>En tant que</strong> responsable d’une association de quartier,<br />
+<strong>je souhaite</strong> organiser un système de prêt d’outils entre habitants,<br />
+<strong>afin de</strong> réduire les achats inutiles et de créer un service simple à tester.</p>
+</blockquote>
+<p>La responsable décrit son idée dans CHamFlow, même si elle ne connaît pas encore toutes les réponses. L’application distingue les informations certaines des hypothèses, identifie les habitants et l’association comme parties prenantes, puis propose les étapes essentielles. Avec son accord, l’IA génère un diagramme adapté et suggère un premier MVP : inscrire un petit groupe d’habitants, référencer quelques outils et tester les premiers prêts dans un seul quartier.</p>
+<p>Le résultat peut ensuite être relu, téléchargé et partagé avec de futurs participants ou collaborateurs.</p>
+<pre><code class="language-mermaid">flowchart TD
+    A[Idée : partager des outils entre habitants] --&gt; B[Décrire le besoin dans CHamFlow]
+    B --&gt; C[Identifier les participants et les informations manquantes]
+    C --&gt; D[Définir un premier test à petite échelle]
+    D --&gt; E[Créer une liste simple des habitants et des outils]
+    E --&gt; F[Tester les demandes, prêts et retours]
+    F --&gt; G[Recueillir les avis des participants]
+    G --&gt; H{Le test répond-il au besoin ?}
+    H --&gt;|Oui| I[Étendre progressivement le service]
+    H --&gt;|À améliorer| J[Corriger les règles ou le parcours]
+    J --&gt; F
+</code></pre>
+<h3>Technologies et déploiement</h3>
+<p>TypeScript, React, Vite, Mermaid, Cloudflare Workers et API OpenAI. Le Worker est conservé sur Cloudflare, mais sa route publique est désactivée. La clé API reste protégée côté serveur.</p>
+<h3>Mon rôle et l’assistance de l’IA</h3>
+<p>J’ai défini le besoin, le parcours utilisateur, les catégories de projets et les règles de confidentialité. J’ai piloté les évolutions, testé les différentes versions sur ordinateur et mobile, diagnostiqué les problèmes de déploiement et vérifié les résultats générés. L’IA a assisté le développement, la génération des diagrammes et la résolution des problèmes techniques.</p>
+<h2>CHamDocs × CHamFlow — Perspective</h2>
+<p>L'intégration n'est pas réalisée. Le client pourrait fournir des procédures, contraintes et notes de besoin. CHamDocs retrouverait les passages utiles ; CHamFlow produirait un cadrage et un diagramme s'appuyant sur ces preuves, en signalant les hypothèses et les points à clarifier.</p>
+<p>Avant ouverture à des clients, il faudrait préciser les autorisations, la confidentialité, les informations transmises au modèle et la séparation des dossiers. Une version dédiée sera présentée après son implémentation et ses évaluations.</p>
+<p><a href="index.html">Retour au portfolio</a></p></article></main><footer><span>Taame Beraki · Projets personnels</span><a href="references.html">Sources et crédits</a></footer></body></html>

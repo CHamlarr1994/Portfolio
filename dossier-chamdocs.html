@@ -1,0 +1,121 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dossier technique CHamDocs · Taame Beraki</title><link rel="stylesheet" href="assets/style.css"></head><body><a class="skip" href="#contenu">Aller au contenu</a><header><div class="nav"><a class="brand" href="index.html">Taame Beraki<span>.</span></a><nav aria-label="Navigation principale"><a href="index.html#projets">Projets</a><a href="chamdocs.html">Étude de cas</a><a href="index.html#contact">Contact</a></nav></div></header><main id="contenu"><article class="markdown section"><a class="breadcrumbs" href="index.html">← Portfolio</a><h1>CHamDocs — Assistant documentaire local et évalué</h1>
+<p>CHamDocs recherche des passages dans des documents, puis génère une réponse accompagnée de références. Le projet explore une difficulté concrète : distinguer une réponse plausible d'une réponse soutenue par des sources, y compris quand plusieurs fichiers sont nécessaires.</p>
+<p><strong>Statut :</strong> prototype local fonctionnel. Révision présentée : <code>0996732</code>, préparée pour ce portfolio le 2 novembre 2026. Les intégrations à CHamFlow et CHamHunter sont prévues, non livrées.</p>
+<h2>Découvrir et essayer</h2>
+<ul>
+<li><a href="chamdocs.html">Étude de cas visuelle</a></li>
+<li><a href="entreprise.html">Guide d'évolution en entreprise</a></li>
+</ul>
+<p>Le code et les archives CHamDocs sont conservés en privé. La présentation publique décrit les essais et l’architecture sans distribuer les sources ni les fichiers de démonstration.</p>
+<pre><code class="language-sh">docker compose up -d --build
+docker compose exec ollama ollama pull qwen3:1.7b
+docker compose exec api python chamdocs.py index
+</code></pre>
+<p>Ouvrir http://127.0.0.1:8766/ et sélectionner demo. Prérequis : Docker et Compose avec conteneurs Linux, connexion pour les téléchargements initiaux et ressources suffisantes. Configuration de développement : Windows, WSL 2 et 16 Go de RAM. Prévoir plusieurs Go de stockage. La version locale n'exige pas de facture d'API ; le matériel, l'électricité et l'exploitation ne sont pas gratuits.</p>
+<h2>Démonstrations et documents volumineux</h2>
+<p><code>demo</code> illustre une question simple sur cinq documents fictifs courts. <code>multi-demo</code> croise six documents avec des informations réparties, des codes proches et une procédure archivée : code et responsable pour Atlas, puis durée historique et actuelle. Les réponses générées doivent être contrôlées dans les extraits.</p>
+<p>Ces exemples ne valident pas la qualité sur de longs documents. Les mesures HotpotQA sur 50 questions de développement évaluent séparément la recherche des sources, pas l’exactitude générale des réponses.</p>
+<p>L’import actuel est limité aux fichiers <code>.txt</code> et <code>.md</code> UTF-8 de 1 Mo maximum, avec 20 fichiers par espace. La prise en charge de documents plus longs et volumineux est une évolution prévue : import et indexation progressifs, suivi de progression, découpage conservant les références et erreurs explicites. Avant de relever les limites, mesurer la couverture des sources, la qualité des réponses, les temps de traitement et la mémoire sur des corpus de taille croissante. PDF et Word restent à développer séparément.</p>
+<h2>Fonctions livrées</h2>
+<ul>
+<li>Espaces documentaires, import de <code>.txt</code> ou <code>.md</code> UTF-8, liste et suppression des documents.</li>
+<li>Recherche lexicale SQLite FTS5 et recherche par embeddings multilingues FastEmbed.</li>
+<li>Fusion RRF, élimination de doublons et sélection de cinq passages avec deux passages maximum par fichier.</li>
+<li>Génération locale Ollama, choix de sortie français ou anglais, extraits cités conservés dans leur langue originale.</li>
+<li>Vérification des identifiants de sources et de certains codes structurés ; échec distinct d'une information absente.</li>
+<li>Contrôle conservateur de certaines contradictions d'horaires en français, sans appel de génération supplémentaire.</li>
+<li>API FastAPI, interface de démonstration, Docker Compose et déploiement Kubernetes kind à un nœud.</li>
+<li>Contrats d'extension pour générateur, embeddings et reranker ; seul le générateur Ollama est implémenté.</li>
+</ul>
+<h2>Architecture et décisions</h2>
+<pre><code class="language-mermaid">flowchart LR
+    UI[Interface utilisateur] --&gt; API[FastAPI]
+    API --&gt; RET[Recherche hybride]
+    RET --&gt; DB[(SQLite et vecteurs)]
+    RET --&gt; CONTEXTE[Passages sélectionnés]
+    CONTEXTE --&gt; CONTROLE[Contrôles ciblés]
+    CONTROLE --&gt; LLM[Ollama et Qwen3]
+    LLM --&gt; REP[Réponse et références contrôlées]
+    CONTROLE --&gt; DESACCORD[Signalement d'un désaccord explicite]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Choix</th>
+<th>Raison et compromis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Petit modèle local sur CPU</td>
+<td>Réduire les exigences matérielles et éviter une API facturée ; qualité de raisonnement limitée.</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td>Garder le prototype simple ; pas une validation de passage à l'échelle ou d'écriture distribuée.</td>
+</tr>
+<tr>
+<td>Recherche hybride</td>
+<td>Conserver les mots précis et les paraphrases ; le classement nécessite une évaluation.</td>
+</tr>
+<tr>
+<td>RRF k=2</td>
+<td>Après comparaison sur le développement, mieux privilégier les premières positions ; trois régressions documentées.</td>
+</tr>
+<tr>
+<td>Un Pod API, stratégie Recreate</td>
+<td>Démonstration adaptée au stockage local SQLite ; interruption lors du remplacement.</td>
+</tr>
+<tr>
+<td>Composants interchangeables</td>
+<td>Préparer des comparaisons ultérieures ; aucun fournisseur externe n'est activé.</td>
+</tr>
+</tbody>
+</table>
+<h2>Résultats mesurés</h2>
+<p>Sur les mêmes 50 questions de développement HotpotQA distractor, sans augmenter le budget de cinq passages :</p>
+<table>
+<thead>
+<tr>
+<th>Mesure</th>
+<th style="text-align: right;">Avant</th>
+<th style="text-align: right;">Après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Toutes les sources attendues présentes</td>
+<td style="text-align: right;">28/50</td>
+<td style="text-align: right;">35/50</td>
+</tr>
+<tr>
+<td>Toutes les phrases justificatives textuellement présentes</td>
+<td style="text-align: right;">25/50</td>
+<td style="text-align: right;">32/50</td>
+</tr>
+</tbody>
+</table>
+<p>Dix échecs corrigés et trois régressions, soit un gain net de sept. Les 22 échecs initiaux ont été examinés individuellement. Une variante qui améliorait les documents trouvés mais perdait des phrases justificatives a été écartée. Les 50 questions réservées HotpotQA n'ont pas été utilisées.</p>
+<p>Ces mesures ne sont ni un score officiel HotpotQA ni un taux de réponses correctes. Il s'agit des premiers 100 cas de validation, mélangés avec une graine fixe puis répartis en développement et réserve ; ce n'est pas un échantillon aléatoire de tout le jeu. La génération n'a pas été réévaluée après le dernier réglage de fusion.</p>
+<p>Autres vérifications :</p>
+<ul>
+<li>29 tests logiciels réussis dans Kubernetes sur la révision présentée, plus une réponse sourcée vérifiée.</li>
+<li>Remplacement automatique du Pod API après suppression volontaire et conservation des cinq documents.</li>
+<li>Huit essais bilingues synthétiques : sources attendues retrouvées dans les six cas répondables, mais quatre réponses seulement jugées correctes à la relecture par l'assistant.</li>
+<li>Première mesure de génération sur 50 cas externes : 16 erreurs d'exécution ou de validation. Des arrêts OOMKilled ont conduit à ajuster la limite mémoire de 3 à 4 Gio ; deux cas rejoués s'exécutent ensuite, sans démontrer une stabilité générale.</li>
+<li>Comparaison sur 16 questions synthétiques de développement pour un contrôle ciblé de contradiction : 12 à 13 réponses correctes à la relecture par l'assistant ; trois réponses restent partielles. Les 16 questions synthétiques réservées restent non exécutées.</li>
+</ul>
+<p>Les rapports complets, scripts et limites sont dans l'archive : <code>BENCHMARKS.md</code>, <code>EVALUATION.md</code> et <code>evaluations/</code>. Les relectures de l'assistant ne sont pas des évaluations humaines indépendantes.</p>
+<h2>Mon rôle et l'assistance IA</h2>
+<p>J'ai défini le besoin, le périmètre et les scénarios, essayé le parcours dans le navigateur et demandé des évaluations plus difficiles lorsque les petits exemples semblaient trop favorables. Le développement, le diagnostic, la réalisation des évaluations et la documentation ont été assistés par IA. Les essais utilisateurs, les tests automatisés et les relectures de l'assistant sont distingués.</p>
+<h2>Limites actuelles</h2>
+<p>Pas de service public multiutilisateur : authentification et autorisations documentaires à concevoir avant ouverture. Les espaces ne sont pas des comptes. Pas de PDF ou Word, pas de haute disponibilité démontrée, pas de Qdrant, pas d'adaptateur payant livré, pas de connexion actuelle aux deux autres applications. Les sources peuvent être mal lues, les citations incomplètes et les contradictions non détectées. La mémoire et les performances doivent être mesurées sur des charges plus longues.</p>
+<h2>Perspectives</h2>
+<ol>
+<li>Stabiliser les ressources et la qualité de génération, sans modifier les résultats historiques.</li>
+<li>Comparer d'autres composants sur le développement avec coûts et latences, puis décider d'une validation sur réserve.</li>
+<li>Réaliser une version CHamDocs × CHamFlow : cadrage fondé sur les documents du client.</li>
+<li>Réaliser une version CHamDocs × CHamHunter : preuves de compétences recherchées dans les réalisations du candidat.</li>
+</ol>
+<h2>Sources</h2>
+<p><a href="https://hotpotqa.github.io/">HotpotQA</a> ; <a href="https://huggingface.co/datasets/hotpotqa/hotpot_qa">jeu et licence CC BY-SA 4.0</a>. Les mesures citées sont celles des rapports locaux de la révision présentée, pas celles des auteurs du jeu.</p></article></main><footer><span>Taame Beraki · Projets personnels</span><a href="references.html">Sources et crédits</a></footer></body></html>

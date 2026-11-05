@@ -1,0 +1,62 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CHamDocs en entreprise · Taame Beraki</title><link rel="stylesheet" href="assets/style.css"></head><body><a class="skip" href="#contenu">Aller au contenu</a><header><div class="nav"><a class="brand" href="index.html">Taame Beraki<span>.</span></a><nav aria-label="Navigation principale"><a href="index.html#projets">Projets</a><a href="chamdocs.html">Étude de cas</a><a href="index.html#contact">Contact</a></nav></div></header><main id="contenu"><article class="markdown section"><a class="breadcrumbs" href="index.html">← Portfolio</a><h1>CHamDocs en entreprise — Options locales et fournisseurs facturés</h1>
+<p><strong>Aujourd'hui :</strong> le système fonctionne avec FastEmbed et Ollama en local. Le générateur livré est Ollama ; les contrats d'extension existent pour la génération, les embeddings et le reclassement. Aucun connecteur commercial ni clé d'API payante n'est intégré.</p>
+<p><strong>Demain :</strong> un développeur peut implémenter un adaptateur à un fournisseur choisi par l'entreprise, puis l'évaluer. Il ne suffit pas d'écrire le nom d'un fournisseur dans la configuration actuelle. Une valeur inconnue est refusée ; aucun repli payant automatique n'existe.</p>
+<h2>Choisir le bon levier</h2>
+<table>
+<thead>
+<tr>
+<th>Difficulté observée</th>
+<th>Composant à comparer</th>
+<th>Ce qu'un service facturé ne garantit pas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Les bons passages ne remontent pas</td>
+<td>Embeddings, recherche et reranker</td>
+<td>Acheter un générateur ne corrige pas les preuves manquantes.</td>
+</tr>
+<tr>
+<td>Les preuves sont présentes mais mal combinées</td>
+<td>Modèle de génération et contrat de réponse</td>
+<td>Un modèle plus cher peut encore inventer ou omettre des citations.</td>
+</tr>
+<tr>
+<td>Temps de réponse trop long ou mémoire insuffisante</td>
+<td>Dimensionnement, serveur interne ou fournisseur hébergé</td>
+<td>Une capacité supérieure ne garantit pas la qualité métier.</td>
+</tr>
+</tbody>
+</table>
+<h2>Parcours d'intégration</h2>
+<ol>
+<li><strong>Définir une référence.</strong> Conserver la version locale, ses rapports et ses limites ; fixer l'objectif : recherche, qualité de réponse, délai ou capacité.</li>
+<li><strong>Choisir un service.</strong> Examiner son protocole, les modèles proposés, les conditions de traitement des documents et son mode de facturation. Les tarifs seront vérifiés au moment du choix ; aucun montant universel n'est annoncé ici.</li>
+<li><strong>Implémenter l'adaptateur.</strong> Traduire le contrat interne vers l'API du fournisseur et normaliser sa réponse. Garder les identifiants de preuves et les contrôles après génération.</li>
+<li><strong>Configurer côté serveur.</strong> Utiliser un secret de serveur ou de déploiement, jamais une clé dans le navigateur, Git ou l'image Docker. Configurer explicitement le fournisseur, les données envoyées et les règles de journalisation.</li>
+<li><strong>Ajouter les protections d'exploitation.</strong> Délais d'attente, erreurs, limites de débit, plafonds de dépenses et absence de relances facturées incontrôlées. Ces mécanismes budgétaires ne sont pas encore livrés.</li>
+<li><strong>Comparer avant ouverture.</strong> Mesurer sur les mêmes cas de développement : couverture des preuves, exactitude et soutien des réponses, latence, mémoire ou coût. Conserver les erreurs. Ne pas utiliser les questions réservées sans décider explicitement de cette étape.</li>
+<li><strong>Déployer avec les accès nécessaires.</strong> Avant un service partagé : authentification, contrôle d'accès à chaque espace, politique de suppression, sauvegarde et exploitation.</li>
+</ol>
+<h2>Contrats disponibles dans le code</h2>
+<p>Le fichier <code>providers.py</code> est inclus dans l'archive du projet.</p>
+<h3>Génération</h3>
+<pre><code class="language-python">class Generator(Protocol):
+    model_id: str
+    def generate(self, body: dict) -&gt; dict: ...
+</code></pre>
+<p><code>ask(..., generator=adapter)</code> accepte un adaptateur. La réponse attendue est de la forme <code>{"response": "&lt;texte JSON au schéma attendu&gt;"}</code>. Le corps actuel contient la consigne, les passages, un schéma et des paramètres Ollama : l'adaptateur doit les traduire vers le protocole cible, pas simplement transmettre le corps brut à n'importe quelle API. Les références et certains codes structurés sont validés ensuite. Un résultat valide au schéma ne garantit pas sa justesse sémantique.</p>
+<h3>Embeddings</h3>
+<p>Un encodeur expose <code>embed(texts)</code>, <code>query_embed(question)</code> et un identifiant stable <code>model_id</code>, ou <code>model_name</code> pour FastEmbed. Changer d'identifiant invalide le cache ; changer les poids sans changer d'identifiant rendrait cette protection inopérante. Les vecteurs doivent être comparables en dimensions et en espace de représentation.</p>
+<h3>Reclassement</h3>
+<p>Un reranker reçoit la question et les candidats. Il retourne les mêmes passages dans un ordre différent. L'application rejette les textes modifiés, les identifiants inconnus ou les doublons. Le fournisseur ne doit pas réécrire les preuves.</p>
+<h2>Configuration locale existante</h2>
+<pre><code class="language-text">CHAMDOCS_GENERATOR=ollama
+CHAMDOCS_MODEL=qwen3:1.7b
+OLLAMA_URL=http://ollama:11434
+</code></pre>
+<p>Dans Compose, déclarer les variables explicitement dans <code>environment</code> ; les variables de l'ordinateur ne sont pas transmises automatiquement. Le modèle doit être installé sur le serveur Ollama visé. La configuration livrée désactive les fonctions cloud d'Ollama.</p>
+<p>La sélection d'un fournisseur commercial par un simple nom dans <code>configured_generator</code> n'est pas implémentée. Après développement et tests de son adaptateur, il faudra ajouter une branche de configuration explicite, avec les secrets et protections retenus pour ce fournisseur.</p>
+<h2>Comparaison à présenter au décideur</h2>
+<p>Préparer une fiche avec le composant, sa version, la charge testée, les documents autorisés à sortir du réseau, le coût mesuré par volume, la latence médiane et les cas en échec. Fixer un plafond avant le pilote facturé. Un score de 50/50 n'est pas promis ; un résultat sur 50 cas ne garantit pas non plus une fiabilité générale.</p>
+<p>Le fonctionnement local reste une option. L'entreprise peut privilégier confidentialité, coût, capacité ou précision selon ses contraintes, sans confondre ces critères.</p></article></main><footer><span>Taame Beraki · Projets personnels</span><a href="references.html">Sources et crédits</a></footer></body></html>

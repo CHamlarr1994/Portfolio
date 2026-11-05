@@ -1,0 +1,77 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CHamForm · Taame Beraki</title><link rel="stylesheet" href="assets/style.css"></head><body><a class="skip" href="#contenu">Aller au contenu</a><header><div class="nav"><a class="brand" href="index.html">Taame Beraki<span>.</span></a><nav aria-label="Navigation principale"><a href="index.html#projets">Projets</a><a href="chamdocs.html">Étude de cas</a><a href="index.html#contact">Contact</a></nav></div></header><main id="contenu"><article class="markdown section"><a class="breadcrumbs" href="index.html">← Portfolio</a><h1>CHamForm — Du CV importé au modèle Word</h1>
+<p>Importer un CV Word, PDF ou image, vérifier les informations extraites et produire un document Word modifiable avec photo. La démonstration est actuellement conservée en accès privé.</p>
+<h2>Nom du projet et statut</h2>
+<p><strong>CHamForm</strong> est le nom retenu pour l’application de mise en forme du CV. Son développement a commencé sous le nom <strong>CHamCV</strong> : le code reste dans le dossier local <code>CHamCV</code> du projet Écosystème CHam et le Worker Cloudflare <code>chamcv</code> est conservé avec sa route publique désactivée.</p>
+<p>Le parcours testé utilise une connexion Google. Après connexion, le classement local des informations est disponible dans le navigateur.</p>
+<h2>Parcours testé</h2>
+<ol>
+<li>Se connecter avec Google.</li>
+<li>Importer un CV Word, PDF ou image.</li>
+<li>Classer les informations dans le navigateur, puis relire et corriger les rubriques.</li>
+<li>Ajouter, remplacer ou retirer la photo proposée.</li>
+<li>Choisir parmi cinq modèles et télécharger un Word modifiable.</li>
+</ol>
+<p>Les cinq modèles sont CHamHunter, Éditorial, Contemporain, Chronologique et Compact. Les documents générés contiennent des champs balisés lisibles par CHamHunter. Lorsqu’un Word importé est déjà compatible, il peut aussi être conservé tel quel.</p>
+<h2>Vérification IA facultative</h2>
+<p>La vérification IA n’est pas nécessaire pour utiliser le classement local. Dans la version testée, elle doit être cochée avant l’import et se lance ensuite automatiquement. Les propositions sont comparées aux champs actuels et peuvent être appliquées rubrique par rubrique.</p>
+<p>Lorsque cette option est activée, les éléments nécessaires à la vérification sont envoyés au service IA. Sans cette option, le classement reste dans le navigateur.</p>
+<h2>État vérifié</h2>
+<table>
+<thead>
+<tr>
+<th>Périmètre</th>
+<th>État</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trois CV de base en PDF, image et Word</td>
+<td>Retestés sur le site jusqu’au téléchargement</td>
+</tr>
+<tr>
+<td>Jeu de test</td>
+<td>Dix CV fictifs et trois variantes</td>
+</tr>
+<tr>
+<td>Génération avec photo et cinq modèles Word</td>
+<td>Testée</td>
+</tr>
+<tr>
+<td>Compatibilité des champs balisés avec CHamHunter</td>
+<td>Vérifiée</td>
+</tr>
+<tr>
+<td>Vérification IA</td>
+<td>Trois appels réels comparés sur les cas difficiles</td>
+</tr>
+<tr>
+<td>CV réels utilisés pendant les essais</td>
+<td>Traités dans le navigateur ; aucun fichier publié</td>
+</tr>
+</tbody>
+</table>
+<p>Ces résultats décrivent des essais fonctionnels ciblés. Ils ne garantissent pas que tous les formats ou toutes les mises en page de CV seront interprétés sans correction.</p>
+<h2>Modèle Contemporain — validation locale</h2>
+<p>Une mise à jour locale du modèle Contemporain améliore la lisibilité des compétences :</p>
+<ul>
+<li>tableau à deux colonnes sans bordures, avec les puces dans la première colonne et le texte dans la seconde ;</li>
+<li>retours à la ligne alignés sur le début du texte ;</li>
+<li>corps à 11,5 pt, titres de rubrique à 14 pt et intitulés d’expérience à 13 pt ;</li>
+<li>répétition des lignes de compétences par le générateur pour adapter leur nombre au contenu.</li>
+</ul>
+<p>Un export fictif avec quatre compétences a tenu sur une page dans Word. CHamHunter a ensuite pu relire et adapter les champs balisés de ce document.</p>
+<p>Cette validation concerne la version locale située dans le dossier historique <code>CHamCV</code>. Son déploiement sur la version Cloudflare n’est pas encore confirmé.</p>
+<h2>Évolutions prévues</h2>
+<ul>
+<li>Ajouter un bouton <strong>« Continuer dans CHamHunter »</strong> après la génération.</li>
+<li>Permettre de lancer la vérification IA après avoir consulté le résultat, sans devoir choisir l’option avant l’import.</li>
+</ul>
+<h2>Place dans l’écosystème</h2>
+<ul>
+<li><strong>CHamForm</strong> prépare le CV de référence et ses champs balisés.</li>
+<li><strong>CHamHunter</strong> compare ce CV à une offre et prépare une adaptation à valider.</li>
+<li><strong>CHamCoach</strong> reprend les sujets à travailler pour la formation et la simulation d’entretien ; son parcours complet reste en développement.</li>
+</ul>
+<h2>Ma contribution</h2>
+<p>J’ai défini le parcours, comparé les modèles, essayé les imports et contrôlé les résultats produits jusqu’au téléchargement. L’IA a assisté l’implémentation et les corrections ; les essais publiés utilisent des descriptions agrégées, sans joindre les CV réels ni les Word générés à partir de ceux-ci.</p>
+<p><a href="index.html">Retour au portfolio</a></p></article></main><footer><span>Taame Beraki · Projets personnels</span><a href="references.html">Sources et crédits</a></footer></body></html>

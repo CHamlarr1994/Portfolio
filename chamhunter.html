@@ -1,0 +1,20 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CHamHunter · Taame Beraki</title><link rel="stylesheet" href="assets/style.css"></head><body><a class="skip" href="#contenu">Aller au contenu</a><header><div class="nav"><a class="brand" href="index.html">Taame Beraki<span>.</span></a><nav aria-label="Navigation principale"><a href="index.html#projets">Projets</a><a href="chamdocs.html">Étude de cas</a><a href="index.html#contact">Contact</a></nav></div></header><main id="contenu"><article class="markdown section"><a class="breadcrumbs" href="index.html">← Portfolio</a><h1>CHamHunter — De l’offre au CV ciblé</h1>
+<p>Rechercher des offres, vérifier les correspondances avec son CV et exporter une version Word ciblée. La démonstration est actuellement conservée en accès privé.</p>
+<h2>Version web testée</h2>
+<ul>
+<li>Recherche d’offres et analyse d’une annonce sélectionnée, avec un score direct calculé par des règles, distinct du classement de recherche.</li>
+<li>Lecture IA complémentaire lorsqu’elle est configurée. Les extraits de l’offre et du CV étayent les correspondances à vérifier.</li>
+<li>Adaptation d’un modèle Word avec aperçu modifiable et choix de cinq autoformations au maximum dans le CV.</li>
+<li>Connexion Google et candidatures enregistrées par compte dans Cloudflare D1. La déconnexion révoque la session et retire le modèle Word mémorisé dans le navigateur.</li>
+</ul>
+<p>La version web utilise React, TypeScript et Cloudflare Workers. La première version Python est présentée dans les <a href="archives.html">notes historiques</a>.</p>
+<h2>Écosystème emploi et état des validations</h2>
+<ol>
+<li><strong>CHamForm</strong> — mettre en forme le CV et produire un modèle Word de référence. Le parcours avec les cinq modèles Word est validé en local. Le Worker Cloudflare conserve l’ancien nom CHamCV, mais sa route publique est désactivée.</li>
+<li><strong>CHamHunter</strong> — regrouper le profil Google, le CV de référence et les candidatures dans « Mon compte ». Un remplacement du modèle s’appliquera aux nouvelles candidatures. Les dossiers existants garderont leur version.</li>
+<li><strong>CHamCoach</strong> — poursuivre le prototype local de formation, de révision des acquis et de simulation d’entretien, puis valider le transfert entre applications en production. Le code reste pour l’instant dans le dossier historique <code>CHamPrep</code>.</li>
+</ol>
+<p>Le transfert de la fiche vers CHamCoach a été validé en local dans deux navigateurs avec le même compte. Le renvoi de la fiche rouvre la préparation et conserve les réponses saisies. Cette validation locale ne vaut pas encore validation du parcours publié.</p>
+<h2>Ma contribution</h2>
+<p>J’ai défini le parcours et les règles de sincérité du CV, puis testé les évolutions sur des offres et des dossiers fictifs. L’IA a également assisté le développement et les corrections.</p>
+<p><a href="index.html">Retour au portfolio</a></p></article></main><footer><span>Taame Beraki · Projets personnels</span><a href="references.html">Sources et crédits</a></footer></body></html>
