@@ -1,0 +1,361 @@
+:root {
+  --paper: #edf4fc;
+  --ink: #091a36;
+  --muted: #5b6f8d;
+  --line: #b9cbe1;
+  --accent: #155eef;
+  --card: #dce9f8;
+  --lime: #35d9f2;
+  --shadow: 0 20px 60px rgba(13, 53, 109, .16);
+}
+
+body.dark {
+  --paper: #071426;
+  --ink: #edf5ff;
+  --muted: #9eb2ce;
+  --line: #29415f;
+  --accent: #5b8cff;
+  --card: #0f2440;
+  --lime: #35d9f2;
+  --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+}
+
+.portrait {
+  background: linear-gradient(145deg, #d8e8ff, #3978d7 52%, #071426);
+}
+
+.portrait.has-photo {
+  background-position: center 16%;
+}
+
+.project-card[data-color=violet] { --project: #155eef; }
+.project-card[data-color=coral] { --project: #3978d7; }
+.project-card[data-color=mint] { --project: #22a9c7; }
+
+.contact {
+  background: linear-gradient(145deg, #071426, #0c2b57);
+  color: #edf5ff;
+}
+
+.contact .eyebrow,
+.contact-meta {
+  color: #b9d0ee;
+}
+
+.contact-link {
+  color: #ffffff;
+  border-color: #7799c7;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.contact-meta .social-buttons a {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 9px 15px;
+  border: 1px solid #8eb4e5;
+  border-radius: 999px;
+  background: rgba(237, 245, 255, .1);
+  color: #ffffff;
+  font-weight: 500;
+  transition: background .2s, color .2s, transform .2s;
+}
+
+.contact-meta .social-buttons a:hover {
+  background: #edf5ff;
+  color: #071426;
+  transform: translateY(-2px);
+}
+
+.status-dot {
+  background: #35d9f2;
+  box-shadow: 0 0 0 5px color-mix(in srgb, #35d9f2 18%, transparent);
+}
+
+.interests {
+  display: grid;
+  grid-template-columns: 18% 82%;
+  gap: 30px;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.passions-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 20px;
+  margin-top: 18px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  font: 600 20px "Playfair Display", serif;
+  transition: background .2s, transform .2s;
+}
+
+.passions-link:hover {
+  background: var(--card);
+  transform: translateY(-2px);
+}
+
+.passions-link span {
+  color: var(--accent);
+}
+
+.passions-link small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font: 11px "DM Mono", monospace;
+}
+
+.passions-page {
+  min-height: 100vh;
+}
+
+.passions-hero {
+  min-height: 78vh;
+  padding: 170px 8vw 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.passions-hero h1 {
+  margin: 22px 0;
+  font-size: clamp(80px, 14vw, 190px);
+}
+
+.passions-hero .lede {
+  max-width: 760px;
+  color: var(--muted);
+}
+
+.passions-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 8vw;
+}
+
+.passions-list article {
+  min-height: 360px;
+  padding: 45px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.passions-list article:nth-child(2n) {
+  border-right: 0;
+}
+
+.passions-list span {
+  color: var(--accent);
+  font: 11px "DM Mono", monospace;
+}
+
+.passions-list h2 {
+  margin: 90px 0 20px;
+  font-size: clamp(42px, 6vw, 80px);
+}
+
+.passions-list p {
+  max-width: 480px;
+  color: var(--muted);
+}
+
+.passions-next {
+  padding: 140px 8vw;
+  text-align: center;
+}
+
+.passions-next .eyebrow {
+  justify-content: center;
+}
+
+.passions-next h2 {
+  margin: 28px 0 55px;
+  font-size: clamp(55px, 8vw, 110px);
+}
+
+.interest-card {
+  min-height: 250px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--card) 65%, transparent), transparent);
+}
+
+.interest-card > span {
+  color: var(--accent);
+  font: 11px "DM Mono", monospace;
+}
+
+.interest-card h3 {
+  margin: 52px 0 15px;
+  font: 600 27px "Playfair Display", serif;
+  line-height: 1.1;
+}
+
+.interest-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.goal-card {
+  position: relative;
+  min-height: 285px;
+  padding: 30px;
+  background: var(--paper);
+}
+
+.goal-number {
+  color: var(--accent);
+  font: 500 11px "DM Mono", monospace;
+}
+
+.goal-horizon {
+  margin: 42px 0 10px;
+  color: var(--accent);
+  font: 500 11px "DM Mono", monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.goal-card h3 {
+  max-width: 270px;
+  margin: 0 0 18px;
+  font: 600 28px "Playfair Display", serif;
+  line-height: 1.12;
+}
+
+.goal-card > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.skill-group li {
+  position: relative;
+  padding: 12px 0 12px 19px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.skill-group li::before {
+  content: "↳";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.skills .heading-row h2 {
+  max-width: 520px;
+  font-size: clamp(48px, 5.4vw, 76px);
+}
+
+.skills .heading-row > p {
+  max-width: 300px;
+}
+
+.additional-tools {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 28px;
+  margin-top: 18px;
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+
+.additional-title {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  align-content: start;
+  gap: 4px 10px;
+}
+
+.additional-title > span {
+  grid-row: 1 / span 2;
+  color: var(--accent);
+  font: 500 24px "DM Mono", monospace;
+}
+
+.additional-title strong {
+  font: 600 18px "Playfair Display", serif;
+}
+
+.additional-title small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.tool-chip {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 58px;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card) 55%, transparent);
+}
+
+.tool-chip strong {
+  font-size: 12px;
+}
+
+.tool-chip span {
+  color: var(--muted);
+  font: 10px "DM Mono", monospace;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .interests { grid-template-columns: 1fr; }
+  .interest-grid { grid-template-columns: 1fr; }
+  .goal-grid { grid-template-columns: 1fr; }
+  .additional-tools { grid-template-columns: 1fr; }
+  .passions-list { grid-template-columns: 1fr; padding: 0 5vw; }
+  .passions-list article { border-right: 0; }
+}
+
+@media (max-width: 1100px) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .skills .section-label {
+    margin-bottom: 35px;
+  }
+
+  .skills .heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .skills .heading-row > p {
+    max-width: 520px;
+  }
+
+  .skills .skill-grid {
+    grid-template-columns: 1fr;
+  }
+}

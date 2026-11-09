@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CV interactif de Taame Beraki, informaticien de gestion : parcours, compétences, projets et objectifs professionnels.">
+  <meta name="theme-color" content="#f4f1ea">
+  <title>Taame Beraki · CV interactif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Retour en haut"><span id="brand-initials">VN</span><i></i></a>
+    <nav aria-label="Navigation principale">
+      <a href="../index.html">Portfolio</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#interets">Intérêts</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Changer de thème" title="Changer de thème">◐</button>
+      <a class="pill small" href="#contact">Me contacter</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section reveal">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span><span id="availability"></span></p>
+        <h1><span id="first-name">Votre</span><br><em id="last-name">Nom</em></h1>
+        <p class="hero-role" id="role"></p>
+        <p class="lede" id="tagline"></p>
+        <div class="hero-cta">
+          <a class="pill" href="#projets">Découvrir mon travail <span>↘</span></a>
+          <button class="text-btn" id="print-cv">Télécharger en PDF <span>↓</span></button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Portrait stylisé">
+        <div class="portrait-frame">
+          <div class="portrait" id="portrait"><span id="portrait-initials">VN</span></div>
+          <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span>
+        </div>
+        <div class="location-card"><span>⌖</span><div><small>Basé à</small><strong id="location"></strong></div></div>
+      </div>
+      <div class="scroll-cue"><span></span>Faites défiler</div>
+    </section>
+
+    <section class="intro section reveal" id="apropos">
+      <div class="section-label"><span>01</span> Projet professionnel</div>
+      <div class="intro-content">
+        <p class="statement" id="about"></p>
+        <div class="goal-grid" id="goals"></div>
+      </div>
+    </section>
+
+    <section class="experience section reveal" id="parcours">
+      <div class="section-label"><span>02</span> Expérience</div>
+      <div class="section-main">
+        <div class="heading-row"><h2>Mon <em>parcours</em></h2><p>Une trajectoire au croisement du support, des outils métier et de l’intelligence artificielle.</p></div>
+        <div class="timeline" id="experiences"></div>
+      </div>
+    </section>
+
+    <section class="projects section reveal" id="projets">
+      <div class="section-label"><span>03</span> Sélection</div>
+      <div class="section-main">
+        <div class="heading-row"><h2>Projets <em>choisis</em></h2><div class="filters" id="filters"></div></div>
+        <div class="project-grid" id="projects"></div>
+      </div>
+    </section>
+
+    <section class="skills section reveal" id="competences">
+      <div class="section-label"><span>04</span> Compétences</div>
+      <div class="section-main">
+        <div class="heading-row"><h2>Compétences & <em>environnement technique</em></h2><p>Des outils étudiés à l’ESIG, utilisés en expérience professionnelle ou mobilisés dans mes réalisations.</p></div>
+        <div class="skill-grid" id="skills"></div>
+        <div class="additional-tools">
+          <div class="additional-title"><span>+</span><strong>Apprentissage par les projets IA</strong><small>Technologies pratiquées avec assistance IA et encore en consolidation.</small></div>
+          <div class="tool-chips" id="additional-tools"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="more section reveal">
+      <div class="section-label"><span>05</span> En bref</div>
+      <div class="section-main two-cols">
+        <div><h3>Formation</h3><div id="education"></div></div>
+        <div><h3>Langues</h3><ul class="language-list" id="languages"></ul></div>
+      </div>
+    </section>
+
+    <section class="interests section reveal" id="interets">
+      <div class="section-label"><span>06</span> Centres d’intérêt</div>
+      <div class="section-main">
+        <div class="heading-row"><h2>L’IA à travers <em>mes passions</em></h2><p>Musique, vidéo, randonnée et technologie : des terrains personnels où j’explore aussi les possibilités de l’intelligence artificielle.</p></div>
+        <div class="interest-grid" id="interests"></div>
+        <a class="passions-link" href="passions.html">Découvrir ma page Passions <span>↗</span><small>Une page appelée à évoluer avec mes créations et découvertes.</small></a>
+      </div>
+    </section>
+
+    <section class="contact section reveal" id="contact">
+      <p class="eyebrow">Vous recherchez un profil polyvalent et curieux ?</p>
+      <h2>Et si nous travaillions<br><em>ensemble ?</em></h2>
+      <a class="contact-link" id="email-link" href="#"><span id="email"></span><b>↗</b></a>
+      <div class="contact-meta"><span id="phone"></span><div class="social-buttons" id="social-links"></div></div>
+    </section>
+  </main>
+
+  <footer><span id="footer-name"></span><span>CV interactif · <b id="year"></b></span><a href="../index.html">Voir le portfolio ↗</a></footer>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <script src="cv-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
