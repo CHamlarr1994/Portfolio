@@ -30,6 +30,7 @@ function renderAll() {
   $("#skills").innerHTML = data.skills.map((s, i) => `<article class="skill-group"><span class="num">0${i + 1}</span><h3>${s.group}</h3><ul>${s.items.map(x => `<li>${x}</li>`).join("")}</ul></article>`).join("");
   $("#additional-tools").innerHTML = data.additionalSkills.map(x => `<div class="tool-chip"><strong>${x.name}</strong><span>${x.level}</span></div>`).join("");
   $("#education").innerHTML = data.education.map(x => `<div class="edu-item"><span>${x.year}</span><div><strong>${x.degree}</strong><small>${x.school}</small></div></div>`).join("");
+  $("#self-learning").innerHTML = data.selfLearning.map(x => `<div class="edu-item"><span>${x.year}</span><div><strong>${x.degree}</strong><small>${x.school}</small></div></div>`).join("");
   $("#languages").innerHTML = data.languages.map(x => `<li>${x}</li>`).join("");
   $("#interests").innerHTML = data.interests.map((x, i) => `<article class="interest-card"><span>0${i + 1}</span><h3>${x.title}</h3><p>${x.text}</p></article>`).join("");
   $("#social-links").innerHTML = data.links.map(x => `<a href="${x.url}" target="_blank" rel="noreferrer">${x.label} ↗</a>`).join("");

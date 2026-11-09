@@ -159,9 +159,11 @@ window.CV_DATA = {
   ],
   education: [
     { year: "ES", degree: "Bachelor professionnel en informatique de gestion", school: "CEC Raymond-Uldry" },
-    { year: "CFC", degree: "Employé de commerce, profil E", school: "CEC Aimée-Stitelmann" },
-    { year: "IA", degree: "Autoformation & apprentissage continu en intelligence artificielle", school: "AI Fundamentals — OpenAI · Machine Learning — cours en ligne d’Andrew Ng (en cours)" },
-    { year: "MÉTHODE", degree: "Organisation du travail avec l’intelligence artificielle", school: "Cadrage, rôles, transmissions, tests et validation humaine" }
+    { year: "CFC", degree: "Employé de commerce, profil E", school: "CEC Aimée-Stitelmann" }
+  ],
+  selfLearning: [
+    { year: "OPENAI", degree: "AI Fundamentals", school: "Autoformation en ligne" },
+    { year: "EN COURS", degree: "Machine Learning — Andrew Ng", school: "Cours en ligne · apprentissage autonome" }
   ],
   languages: ["Français · langue maternelle", "Anglais · niveau B1"]
 };

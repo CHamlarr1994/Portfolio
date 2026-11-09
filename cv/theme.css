@@ -328,6 +328,16 @@ body.dark {
   text-transform: uppercase;
 }
 
+.brief-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(220px, .8fr);
+  gap: 5vw;
+}
+
+.brief-grid h3 {
+  font: 600 40px "Playfair Display", serif;
+}
+
 @media (max-width: 900px) {
   .interests { grid-template-columns: 1fr; }
   .interest-grid { grid-template-columns: 1fr; }
@@ -338,6 +348,10 @@ body.dark {
 }
 
 @media (max-width: 1100px) {
+  .brief-grid {
+    grid-template-columns: 1fr;
+  }
+
   .skills {
     grid-template-columns: 1fr;
   }
