@@ -46,7 +46,6 @@ renderIdentity(); renderAll();
 $("#filters").addEventListener("click", e => { if (!e.target.matches(".filter")) return; document.querySelectorAll(".filter").forEach(x => x.classList.remove("active")); e.target.classList.add("active"); renderProjects(e.target.dataset.filter); });
 $("#theme-toggle").addEventListener("click", () => { document.body.classList.toggle("dark"); localStorage.setItem("cv-theme", document.body.classList.contains("dark") ? "dark" : "light"); });
 if (localStorage.getItem("cv-theme") === "dark" || (!localStorage.getItem("cv-theme") && matchMedia("(prefers-color-scheme:dark)").matches)) document.body.classList.add("dark");
-$("#print-cv").addEventListener("click", () => window.print());
 const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: .12 });
 document.querySelectorAll(".reveal").forEach(x => observer.observe(x));
 const cursor = $(".cursor-dot"); document.addEventListener("pointermove", e => { cursor.style.left = `${e.clientX}px`; cursor.style.top = `${e.clientY}px`; });
