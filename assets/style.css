@@ -8,3 +8,22 @@
 .portfolio-hero{display:block;text-align:center;padding:76px 0 64px}.portfolio-hero>div{max-width:900px;margin:auto}.portfolio-hero .lede{max-width:760px;margin:0 auto 18px}.portfolio-hero p:not(.lede){max-width:730px;margin:16px auto}.portfolio-hero .actions{justify-content:center}.portfolio-hero h1{font-size:clamp(38px,5vw,62px)}
 .project-card{align-items:stretch}.project-card .status{align-self:flex-start}.project-visual{width:100%;min-height:160px;text-align:center;align-items:center}.project-card>.tags{min-height:62px;align-content:flex-start}.project-card>p{min-height:70px}.project-preview{width:100%;min-width:0;align-self:stretch;border:1px solid var(--line);padding:0;margin:12px 0 22px;border-radius:10px;overflow:hidden}.project-preview summary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:64px;padding:16px 18px;text-align:center;line-height:1.45;list-style:none;overflow-wrap:anywhere;background:#edf6fa}.project-preview summary::-webkit-details-marker{display:none}.project-preview summary::before{content:'+';font-size:20px;line-height:1;flex-shrink:0}.project-preview[open] summary::before{content:'−'}.project-preview[open] summary{border-bottom:1px solid var(--line)}.project-preview p{padding:0 22px;margin:20px 0;overflow-wrap:anywhere}.project-preview p:last-child{margin-bottom:24px}.project-card>.project-link{width:100%;text-align:center;padding:12px 8px;overflow-wrap:anywhere}.project-group:last-of-type>.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:850px){.cards,.project-group:last-of-type>.cards{grid-template-columns:1fr}.project-card>p,.project-card>.tags{min-height:0}.portfolio-hero{padding:48px 0}.project-preview summary{min-height:64px}}
+
+/* Navigation mobile stable et thème sombre selon la préférence du système. */
+@media(max-width:700px){
+  .nav{align-items:center;flex-direction:column;gap:12px}
+  nav{width:100%;max-width:none;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:2px 2px 7px;scrollbar-width:thin}
+  nav a{white-space:nowrap}
+}
+@media(prefers-color-scheme:dark){
+  :root{color-scheme:dark;--ink:#e8eef5;--muted:#b7c4d2;--paper:#101821;--line:#354556;--green:#9bc7df;--mint:#20394a;--orange:#9bc7df}
+  header{background:#101821f2}
+  .skip,.card,.comparison,details{background:#172330}
+  .project-visual,.project-preview summary,.metric,.note{background:#1b3040}
+  .project-visual>span,.project-preview summary,.markdown a,th{color:#b9ddf0}
+  .project-visual p{color:#c5dbe7}
+  .track{background:#253545}
+  .button.secondary{color:var(--ink);border-color:#60758a}
+  pre,.wide{background:#0b1118}
+  .diagram{background:#fff}
+}

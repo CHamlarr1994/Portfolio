@@ -79,9 +79,9 @@ window.CV_DATA = {
     {
       title: "CHamDocs",
       category: "Applications",
-      year: "Assistant",
-      description: "Assistant documentaire produisant des réponses sourcées, avec tests de persistance des données et environnement conteneurisé.",
-      tags: ["Python", "FastAPI", "Docker", "Kubernetes"],
+      year: "0.4.0 local",
+      description: "Moteur local de recherche documentaire retournant jusqu’à cinq extraits originaux avec leur fichier et leur numéro de passage, sans réponse générée.",
+      tags: ["Python", "FastAPI", "SQLite FTS5", "BM25"],
       color: "coral",
       url: "https://chamlarr1994.github.io/Portfolio/chamdocs.html"
     },
@@ -131,8 +131,8 @@ window.CV_DATA = {
     { name: "FastAPI", level: "pratiqué en projet assisté par IA" },
     { name: "React & TypeScript", level: "appris en situation de projet" },
     { name: "Node.js", level: "appris en situation de projet" },
-    { name: "Docker Compose", level: "pratiqué en projet assisté par IA" },
-    { name: "Kubernetes", level: "tests en environnement local" },
+    { name: "Docker Compose", level: "pratiqué sur des versions précédentes ; nouvelle chaîne CHamDocs à valider" },
+    { name: "Kubernetes", level: "exploré localement ; déploiement CHamDocs 0.4.0 non validé" },
     { name: "Cloudflare Workers & D1", level: "déploiements de projets CHam" },
     { name: "PDF.js · Tesseract.js · JSZip", level: "projet CHamForm" },
     { name: "Google OAuth 2.0", level: "intégration dans les projets CHam" },
